@@ -12,14 +12,20 @@ namespace Rakenduste_loomineTARpv21
 {
     public partial class Form1 : Form
     {
+        Button sulge;
+        Button nupp1;
+        Button pildi;
+        Button selge;
+        CheckBox mruut;
         public Form1()
+    
         {
             Height = 600;
             Width = 800;
             Text = "Minu oma vorm koos elementidega";
             BackColor = Color.LightSeaGreen;
 
-            CheckBox mruut= new CheckBox();
+            mruut= new CheckBox();
             mruut.Text = "Stretch";
             mruut.Size = new Size(80, 50);
             mruut.Location = new Point(1,510);
@@ -27,7 +33,7 @@ namespace Rakenduste_loomineTARpv21
             mruut.Font = new Font("French Script MT", 10);
             this.Controls.Add(mruut);
 
-            Button sulge = new Button();
+            sulge = new Button();
             sulge.Text = "Close";
             sulge.Size = new Size(55, 40);
             sulge.Location = new Point(90,509);
@@ -35,7 +41,7 @@ namespace Rakenduste_loomineTARpv21
             sulge.Font = new Font("French Script MT", 10);
             this.Controls.Add(sulge);
 
-            Button nupp1 = new Button();
+            nupp1 = new Button();
             nupp1.Text = "Set Background Color";
             nupp1.Size = new Size(200, 40);
             nupp1.Location = new Point(150, 509);
@@ -43,7 +49,7 @@ namespace Rakenduste_loomineTARpv21
             nupp1.Font = new Font("French Script MT", 10);
             this.Controls.Add(nupp1);
 
-            Button selge = new Button();
+            selge = new Button();
             selge.Text = "Clear The Picture";
             selge.Size = new Size(200, 40);
             selge.Location = new Point(355, 509);
@@ -51,36 +57,20 @@ namespace Rakenduste_loomineTARpv21
             selge.Font = new Font("French Script MT", 10);
             this.Controls.Add(selge);
 
-            Button pildi = new Button();
+            pildi = new Button();
             pildi.Text = "Show The Picture";
             pildi.Size = new Size(200, 40);
             pildi.Location = new Point(560, 509);
             pildi.BackColor = Color.LightBlue;
             pildi.Font = new Font("French Script MT", 10);
+            pildi.Click += Pildid_Click;
             this.Controls.Add(pildi);
-        }
-        private void ShowButton_Click(object sender, EventArgs e)
-        {
-
 
         }
-        private void clearButton_Click(object sender, EventArgs e)
+        private void Pildid_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void backgroundButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void closeButton_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
+            Pildid piltVaatamine = new Pildid();
+            piltVaatamine.ShowDialog();
         }
 
     }
