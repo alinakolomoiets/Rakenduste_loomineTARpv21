@@ -18,17 +18,17 @@ namespace Rakenduste_loomineTARpv21
         Button selge;
         CheckBox mruut;
         public Form1()
-    
+
         {
             Height = 600;
             Width = 800;
             Text = "Minu oma vorm koos elementidega";
             BackColor = Color.LightSeaGreen;
 
-            mruut= new CheckBox();
+            mruut = new CheckBox();
             mruut.Text = "Stretch";
             mruut.Size = new Size(80, 50);
-            mruut.Location = new Point(1,510);
+            mruut.Location = new Point(1, 510);
             mruut.BackColor = Color.LightBlue;
             mruut.Font = new Font("French Script MT", 10);
             this.Controls.Add(mruut);
@@ -36,7 +36,7 @@ namespace Rakenduste_loomineTARpv21
             sulge = new Button();
             sulge.Text = "Close";
             sulge.Size = new Size(55, 40);
-            sulge.Location = new Point(90,509);
+            sulge.Location = new Point(90, 509);
             sulge.BackColor = Color.LightBlue;
             sulge.Font = new Font("French Script MT", 10);
             this.Controls.Add(sulge);
