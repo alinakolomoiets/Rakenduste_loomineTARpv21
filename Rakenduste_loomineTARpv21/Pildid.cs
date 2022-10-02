@@ -21,14 +21,11 @@ namespace Rakenduste_loomineTARpv21
         CheckBox checkBox;
         OpenFileDialog openFileDialog;
         ColorDialog colorDialog;
-        PictureBox pictureBox;
         public Pildid()
         {
             this.ClientSize = new System.Drawing.Size(720, 480);
             this.Text = "Pildid";
-            openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "JPEG Files(*.jpg) | *.jpg | PNG Files(*.png) | *.png | BMP Files(*.bmp) | *.bmp | All files(*.*) | *.*";
-            colorDialog = new ColorDialog();
+
             tableLayoutPanel = new TableLayoutPanel
             {
                 AutoSize = true,
@@ -54,7 +51,7 @@ namespace Rakenduste_loomineTARpv21
             this.tableLayoutPanel.TabIndex = 0;
 
             this.Controls.Add(this.tableLayoutPanel);
-            pictureBox = new System.Windows.Forms.PictureBox
+            pilt = new System.Windows.Forms.PictureBox
             {
                 BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D,
                 Dock = System.Windows.Forms.DockStyle.Fill,
@@ -67,6 +64,8 @@ namespace Rakenduste_loomineTARpv21
             {
                 Text = "Stratch",
                 AutoSize = true,
+                BackColor = Color.White,
+                ForeColor = Color.Black,
             };
             checkBox.CheckedChanged += CheckBox_CheckedChanged;
             tableLayoutPanel.Controls.Add(checkBox , 1 , 0);
@@ -87,13 +86,27 @@ namespace Rakenduste_loomineTARpv21
             clear_btn.Click += Tegevus;
             close_btn.Click += Tegevus;
             Button[] buttons = { clear_btn, show_btn, close_btn };
+            FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
+            {
+                Dock = System.Windows.Forms.DockStyle.Fill,
+                FlowDirection = FlowDirection.RightToLeft,
+                AutoSize = true,
+                WrapContents = false,
+                BorderStyle = BorderStyle.FixedSingle,
+            };
+            flowLayoutPanel.Controls.AddRange(buttons);
+            tableLayoutPanel.Controls.Add(flowLayoutPanel, 1, 1);
+            this.Controls.Add(tableLayoutPanel);
+
+            openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All files (*.*)|*.*";
         }
         private void CheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox.Checked)
-                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                pilt.SizeMode = PictureBoxSizeMode.StretchImage;
             else
-                pictureBox.SizeMode = PictureBoxSizeMode.Normal;
+                pilt.SizeMode = PictureBoxSizeMode.Normal;
         }
 
         private void Tegevus(object sender, EventArgs e)
@@ -103,17 +116,25 @@ namespace Rakenduste_loomineTARpv21
             {
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    pictureBox.Load(openFileDialog.FileName);
+                    pilt.Load(openFileDialog.FileName);
                 }
             }
             else if (nupp_sender.Text == "Kustuta")
             {
-                pictureBox.Image = null;
+                pilt.Image = null;
             }
             else if (nupp_sender.Text == "Kinni")
             {
                 this.Close();
             }
+        }
+        private void Stretch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox.Checked)
+                pilt.SizeMode = PictureBoxSizeMode.StretchImage;
+            else
+                pilt.SizeMode = PictureBoxSizeMode.Normal;
+
         }
     }
 }
