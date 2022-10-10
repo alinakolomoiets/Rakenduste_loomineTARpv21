@@ -13,6 +13,7 @@ namespace Rakenduste_loomineTARpv21
     public partial class Sobitamise_mäng : Form
     {
         Label lbl;
+        Random random = new Random();
         List<string> icons = new List<string>()
         {
                 "!", "!", "N", "N", ",", ",", "k", "k",
@@ -23,6 +24,7 @@ namespace Rakenduste_loomineTARpv21
 
         Label esClicked = null;
         Label secClicked = null; 
+
         public Sobitamise_mäng()
         {
             this.Size = new System.Drawing.Size(550, 550);
@@ -53,7 +55,6 @@ namespace Rakenduste_loomineTARpv21
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
 
             this.Controls.Add(this.tableLayoutPanel1);
-
 
             lbl = new Label()
                 {
@@ -215,24 +216,15 @@ namespace Rakenduste_loomineTARpv21
                     Text = "k",
                 };
             tableLayoutPanel1.Controls.Add(lbl, 3, 3);
-            lbl = new Label()
-                {
-                    BackColor = System.Drawing.Color.CornflowerBlue,
-                    AutoSize = false,
-                    Dock = System.Windows.Forms.DockStyle.Fill,
-                    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-                    Font = new System.Drawing.Font("Webdings", 48, System.Drawing.FontStyle.Bold),
-                    Text = "c",
-                };
             tableLayoutPanel1.Controls.Add(lbl, 3, 3);
-            lbl.ForeColor = lbl.BackColor;
             lbl.Click += label1_Click;
             timer.Tick += Timer_Tick;
             AssignIconsToSquares();
+
         }
-        Random random = new Random();
-        private void AssignIconsToSquares()
+        public void AssignIconsToSquares()
         {
+            tableLayoutPanel1 = new TableLayoutPanel();
             foreach (Control control in tableLayoutPanel1.Controls)
             {
                 Label iconLabel = control as Label;
@@ -240,27 +232,10 @@ namespace Rakenduste_loomineTARpv21
                 {
                     int randomNumber = random.Next(icons.Count);
                     iconLabel.Text = icons[randomNumber];
-                    //iconLabel.ForeColor = iconLabel.BackColor;
                     icons.RemoveAt(randomNumber);
                 }
             }
         }
-        public void Check()
-        {
-            foreach (Control control in tableLayoutPanel1.Controls)
-            {
-                Label iconLabel = control as Label;
-
-                if (iconLabel != null)
-                {
-                    if (iconLabel.ForeColor == iconLabel.BackColor)
-                        return;
-                }
-            }
-            MessageBox.Show("");
-            Close();
-        }
-
         private void label1_Click(object sender, EventArgs e)
         {
             if (timer.Enabled == true)
@@ -279,22 +254,47 @@ namespace Rakenduste_loomineTARpv21
                     esClicked.ForeColor = Color.Black;
                     return;
                 }
-
                 secClicked = clickedLabel;
                 secClicked.ForeColor = Color.Black;
 
-                Check();
-
-                if (esClicked.Text == secClicked.Text)
-                {
-                    esClicked = null;
-                    secClicked = null;
-                    return;
-                }
 
                 timer.Start();
             }
         }
+        //private void label1_Click(object sender, EventArgs e)
+        //{
+        //    if (timer.Enabled == true)
+        //        return;
+
+        //    Label clickedLabel = sender as Label;
+
+        //    if (clickedLabel != null)
+        //    {
+        //        if (clickedLabel.ForeColor == Color.Black)
+        //            return;
+
+        //        if (esClicked == null)
+        //        {
+        //            esClicked = clickedLabel;
+        //            esClicked.ForeColor = Color.Black;
+        //            return;
+        //        }
+
+        //        secClicked = clickedLabel;
+        //        secClicked.ForeColor = Color.Black;
+
+        //        //Check();
+
+        //        if (esClicked.Text == secClicked.Text)
+        //        {
+        //            esClicked = null;
+        //            secClicked = null;
+        //            return;
+        //        }
+
+        //        timer.Start();
+        //    }
+        //}
         private void Timer_Tick(object sender, EventArgs e)
         {
             timer.Stop();
@@ -305,8 +305,21 @@ namespace Rakenduste_loomineTARpv21
             esClicked = null;
             secClicked = null;
         }
+        //public void Check()
+        //{
+        //    foreach (Control control in tableLayoutPanel1.Controls)
+        //    {
+        //        Label iconLabel = control as Label;
 
-
+        //        if (iconLabel != null)
+        //        {
+        //            if (iconLabel.ForeColor == iconLabel.BackColor)
+        //                return;
+        //        }
+        //    }
+        //    MessageBox.Show("Woohoo");
+        //    Close();
+        //}
     }
 }
 
